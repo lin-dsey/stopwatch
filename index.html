@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iOS stopwatch</title>
+  <style>
+@import url(https://fonts.googleapis.com/css?family=Roboto:100);
+
+body { background: #000;
+       font-family: 'Roboto', sans-serif; 
+       font-weight: lighter;
+       font-size: 1.3em;
+       height:100%; }
+
+a:hover { background: rgb(46,16,13);
+	        border: double 4px #000;
+	        color: rgb(199,73,64); }
+          
+h1 { font-family: 'Roboto', sans-serif;
+     font-weight: 100;
+     font-size: 2.6em; }
+
+#seconds, #tens { font-size:2em; }
+
+.container { width: 600px;
+             margin: 30px auto;
+             color: #fff;
+             text-align:center; }
+
+button { background: rgb(26,53,31);
+         color: rgb(87,224,110);
+         border: double 4px #000;
+         border-radius: 50%;
+         text-decoration:none;
+         cursor:pointer;
+         font-size:0.8em;
+         font-weight:lighter;
+         padding:19px 11px;
+         margin: 10px; }
+}
+    </style>
+  </head>
+  <body>
+<div class="container">
+<h1><span id="seconds">00</span>:<span id="tens">00</span></h1>
+<button id="start">Start</button>
+<button id="stop">Stop</button>
+<button id="reset">Reset</button>
+</div> 
+<script type="text/javascript">
+window.onload = function () {
+  
+  var seconds = 00; 
+  var tens = 00; 
+  var appendTens = document.getElementById("tens")
+  var appendSeconds = document.getElementById("seconds")
+  var Start = document.getElementById('start');
+  var Stop = document.getElementById('stop');
+  var Reset = document.getElementById('reset');
+  var Interval ;
+
+  Start.onclick = function() { clearInterval(Interval); Interval = setInterval(startTimer, 10); }
+  Stop.onclick = function() { clearInterval(Interval); }
+  Reset.onclick = function() { clearInterval(Interval);
+                               tens = "00";
+  	                           seconds = "00";
+                               appendTens.innerHTML = tens;
+  	                           appendSeconds.innerHTML = seconds; }
+ 
+  function startTimer () { 
+    tens++; 
+    if(tens <= 9){
+      appendTens.innerHTML = "0" + tens; }    
+    if (tens > 9){
+      appendTens.innerHTML = tens; }    
+    if (tens > 99) {
+      console.log("seconds");
+      seconds++;
+      appendSeconds.innerHTML = "0" + seconds;
+      tens = 0;
+      appendTens.innerHTML = "0" + 0; }  
+    if (seconds > 9){
+      appendSeconds.innerHTML = seconds; }
+  }
+}
+    </script>
+  </body>
+</html>
